@@ -1,0 +1,103 @@
+Aqui vai um desafio sólido de **orientação a objetos em PHP**, com espaço pra você praticar modelagem, encapsulamento,
+herança e até um pouco de design:
+
+---
+
+## 🧩 Desafio: Sistema de Biblioteca
+
+Crie um sistema simples de gerenciamento de biblioteca usando **PHP orientado a objetos**.
+
+### 🎯 Objetivo
+
+Modelar uma biblioteca onde usuários podem pegar livros emprestados.
+
+---
+
+## 📦 Requisitos
+
+### 1. Classe `Livro`
+
+* Atributos:
+
+  * `titulo`
+  * `autor`
+  * `isbn`
+  * `disponivel` (boolean)
+
+* Métodos:
+
+  * `emprestar()`
+  * `devolver()`
+  * `getInfo()` (retorna detalhes do livro)
+
+---
+
+### 2. Classe `Usuario`
+
+* Atributos:
+
+  * `nome`
+  * `id`
+  * `livrosEmprestados` (array de objetos Livro)
+
+* Métodos:
+
+  * `pegarLivro(Livro $livro)`
+  * `devolverLivro(Livro $livro)`
+  * `listarLivros()`
+
+---
+
+### 3. Classe `Biblioteca`
+
+* Atributos:
+
+  * `nome`
+  * `livros` (array de Livro)
+  * `usuarios` (array de Usuario)
+
+* Métodos:
+
+  * `adicionarLivro(Livro $livro)`
+  * `cadastrarUsuario(Usuario $usuario)`
+  * `buscarLivroPorTitulo($titulo)`
+  * `listarLivrosDisponiveis()`
+
+---
+
+## 🔥 Regras de negócio
+
+* Um livro só pode ser emprestado se estiver disponível.
+* Um usuário pode pegar no máximo **3 livros**.
+* Ao devolver, o livro volta a ficar disponível.
+* Evite acesso direto aos atributos (use encapsulamento).
+
+---
+
+## ⭐ Bônus (pra subir o nível)
+
+Se quiser deixar mais avançado:
+
+* Criar uma classe abstrata `Pessoa` (base para Usuario)
+* Criar exceções personalizadas (ex: `LivroIndisponivelException`)
+* Registrar histórico de empréstimos
+* Implementar interface (ex: `Emprestavel`)
+
+---
+
+## 💡 Desafio extra (nível hard)
+
+Implemente:
+
+* Sistema de multas por atraso
+* Datas de empréstimo/devolução usando `DateTime`
+
+---
+
+Se quiser, depois que você fizer, posso:
+
+* revisar seu código
+* sugerir melhorias (nível profissional mesmo)
+* ou te passar uma versão "ideal" pra comparar
+
+Quer um desafio ainda mais difícil ou mais voltado pra mercado (tipo API ou sistema real)?

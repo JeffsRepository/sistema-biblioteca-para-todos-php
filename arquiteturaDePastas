@@ -1,0 +1,51 @@
+biblioteca-sistema/
+├── bin/
+│   └── console.php              # ponto de entrada do CLI
+├── src/
+│   ├── Model/
+│   │   ├── Biblioteca/
+│   │   │   └── Biblioteca.php
+│   │   ├── Livro/
+│   │   │   └── Livro.php
+│   │   └── Usuario/
+│   │       ├── Usuario.php      # abstract
+│   │       ├── Cliente.php
+│   │       ├── Funcionario.php
+│   │       └── Admin.php
+│   │
+│   ├── Repository/
+│   │   ├── LivroRepositoryInterface.php
+│   │   ├── UsuarioRepositoryInterface.php
+│   │   ├── InMemoryLivroRepository.php
+│   │   └── InMemoryUsuarioRepository.php
+│   │
+│   ├── Operacao/                # regras de negócio (Strategy)
+│   │   ├── OperacaoLivroInterface.php
+│   │   ├── EmprestarLivro.php
+│   │   ├── DevolverLivro.php
+│   │   ├── VenderLivro.php
+│   │   └── DarBaixaLivro.php
+│   │
+│   ├── Sistema/
+│   │   └── Sistema.php          # Facade: orquestra repositórios + operações
+│   │
+│   ├── Factory/
+│   │   └── UsuarioFactory.php
+│   │
+│   ├── Exception/
+│   │   ├── LivroNaoEncontradoException.php
+│   │   └── UsuarioNaoEncontradoException.php
+│   │
+│   └── CLI/
+│       ├── Menu.php
+│       └── Comando/             # Command Pattern (1 classe por ação)
+│           ├── ComandoInterface.php
+│           ├── AdicionarLivroComando.php
+│           ├── EmprestarLivroComando.php
+│           ├── VenderLivroComando.php
+│           └── CadastrarUsuarioComando.php
+│
+├── tests/
+│   └── (PHPUnit, espelhando src/)
+├── composer.json
+└── README.md

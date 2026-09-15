@@ -28,6 +28,9 @@ $livroTeste = new Livro(
     new Isbn('159-3-23-148410-0')
 );
 
+print_r($livroTeste->isbnLivro());
+exit();
+
 $livro1 = new Livro(
     'O Senhor dos Anéis',
     'J.R.R. Tolkien',
@@ -76,7 +79,7 @@ $biblioteca = new Biblioteca(
     '123.123.123/0001-01'
 );
 //-----FIM-BIBLIOTECA-----------
-
+/* 
 //LIVRO REPOSITORY:
 $livroRepository = new InMemoryLivroRepository();
 $livroRepository->adicionar($livro1);
@@ -107,4 +110,4 @@ $sistemaBiblioteca->emprestar($livro4, $usuarioCliente);
 
 print_r($sistemaBiblioteca->verEmprestimos());
 var_dump($livroRepository->todos());
-var_dump($usuarioCliente->pegaQuantidadeLivroPorUsuario());
+var_dump($usuarioCliente->pegaQuantidadeLivroPorUsuario()); */

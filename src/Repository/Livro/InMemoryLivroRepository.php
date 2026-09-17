@@ -1,102 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Biblioteca\Repository\Livro;
 
-use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 use App\Biblioteca\Modelos\Livros\Livro;
+use App\Repository\LivroRepositoryInterface;
 use Override;
 
 class InMemoryLivroRepository implements LivroRepositoryInterface
 {
-    /** @var Livro[] */
+    /**
+     * Usei o ISBN como chave do array (em vez de indices numericos 0,1,2...)
+     * porque isso torna buscarPorIsbn() e remover() muito mais rapidos e
+     * simples: nao precisa percorrer o array inteiro procurando.
+     *
+     * @var array<string, Livro>
+     */
+
+    /** @var array<string, Livro> */
     private array $livros = [];
-    private int $indice = 0;
 
     #[Override]
     public function adicionar(Livro $livro): void
     {
-        if($this->verificaLivroNoArray($livro))
-        {
-
-            $livroVerificadoNoArray = $this->livros[$this->indice];
-
-            $quantidadeLivroVerificadoNoArray = $livroVerificadoNoArray->quantidade();
-            $quantidadeDoOutroLivro = $livro->quantidade();
-            $somaTotalLivros = (int) $quantidadeLivroVerificadoNoArray + $quantidadeDoOutroLivro;
-
-            $livro = $livroVerificadoNoArray;
-            $livro->setQuantidadeLivro($somaTotalLivros);
-            
-            $this->indice = 0;
-            
-            return;
+        if (isset($this->livros[$livro->isbnLivro()])) {
+            throw new \DomainException('Livro ' . $livro->nomeLivro() . ' já cadastrado no array de livros');
         }
 
-        $this->livros[] = $livro;
-    }
-
-    #[Override]
-    public function remover(string $isbn): void
-    {
-        foreach ($this->livros as $index => $livro) {
-            if ($livro->isbnLivro() === $isbn) {
-                unset($this->livros[$index]);
-                $this->livros = array_values($this->livros);
-                break;
-            }
-        }
+        $this->livros[$livro->isbnLivro()] = $livro;
     }
 
     #[Override]
     public function buscarPorIsbn(string $isbn): ?Livro
     {
-        foreach ($this->livros as $livro) {
-            if ($livro->isbnLivro() === $isbn) {
-                return $livro;
-                break;
-            }
-        }
+        return $this->livros[$isbn] ?? null;
+    }
 
-        return null;
+    #[Override]
+    public function remover(string $isbn): void
+    {
+        unset($this->livros[$isbn]);
     }
 
     #[Override]
     public function todos(): array
     {
-        return $this->livros;
+        return array_values($this->livros);
     }
 
-    public function verificaLivroNoArray(Livro $liv): bool
+    #[Override]
+    public function disponiveis(): array
     {
-        foreach($this->livros as $index => $livro) {
-            if($livro->isbnLivro() === $liv->isbnLivro()) {
-                $this->indice = $index;
-                return true;
-            }
-        }
+        // array_values reindexa o array (0,1,2...) depois do filtro, pra nao
+        // deixar "buracos" nos indices.
+        // array_filter percorre a lista e mantem so quem satisfaz a condicao.
 
-        return false;
-    }
-
-    public function estoqueLivro(Livro $livro): int
-    {
-        $isbn = $livro->isbnLivro();
-
-        return array_reduce($this->livros, function ($subtotal, $livro) use ($isbn) {
-            if ($livro->isbnLivro() === $isbn) {
-                return $subtotal + $livro->quantidade();
-            }
-            return $subtotal;
-        }, 0);
-    }
-
-    public function setQuantidadeLivro(Livro $livro, int $qtd): void
-    {
-        foreach ($this->livros as $livroPercorrivel) {
-            if ($livroPercorrivel->isbnLivro() === $livro->isbnLivro()) {
-                $livroPercorrivel->setQuantidadeLivro($qtd);
-                break;
-            }
-        }
+        return array_values(
+            array_filter($this->livros, fn (Livro $livro) => $livro->estaDisponivel()
+        ));
     }
 }

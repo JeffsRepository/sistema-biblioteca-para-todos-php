@@ -28,8 +28,7 @@ $livroTeste = new Livro(
     new Isbn('159-3-23-148410-0')
 );
 
-print_r($livroTeste->isbnLivro());
-exit();
+//print_r($livroTeste->isbnLivro());
 
 $livro1 = new Livro(
     'O Senhor dos Anéis',
@@ -64,6 +63,7 @@ $usuarioCliente = new Cliente(
     new Cpf('12345678901'),
     'maria pacheco dos santos'
 );
+
 //--------------FIM-CLIENTE-----------
 
 $usuarioFuncionario = new Funcionario(

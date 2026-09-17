@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Biblioteca\Modelos\Biblioteca;
 
 use App\Biblioteca\Modelos\Livros\Livro;
@@ -7,8 +9,8 @@ use App\Biblioteca\Modelos\Livros\Livro;
 class Biblioteca
 {
     public function __construct(
-        private string $nome,
-        private string $cnpj,
+        private readonly string $nome,
+        private readonly string $cnpj,
     ){
     }
 
@@ -20,5 +22,10 @@ class Biblioteca
     public function cnpjBiblioteca(): string
     {
         return $this->cnpj;
+    }
+
+    public function __toString(): string
+    {
+        return "{$this->nomeBiblioteca()} (CNPJ: {$this->cnpjBiblioteca()})";
     }
 }

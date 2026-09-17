@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Biblioteca\Modelos\Usuario;
 
-use BadFunctionCallException;
 use DateTime;
 use DateTimeImmutable;
 use InvalidArgumentException;
@@ -27,34 +28,15 @@ abstract class Usuario
 
     public function cpf(): string
     {
-        return $this->cpf;
+        return $this->cpf->__toString();
     }
 
     public function idade(): int
     {
-        $hoje = new DateTimeImmutable();
-        $idade = $hoje->diff($this->dataNascimento)->format('d/m/Y');
-
+        $hoje = new DateTime();
+        $idade = $hoje->diff($this->dataNascimento)->y;
+        
         return $idade;
-    }
-
-    public function validarDataNascimento(string $data, string $formato = 'd/m/Y'): bool
-    {
-        $dateTime = DateTimeImmutable::createFromFormat($formato, $data);
-
-        if (!$dateTime || $dateTime->format($formato) != $data) {
-            return throw new InvalidArgumentException('Data tem que ser num formato valido');
-        }
-
-        $hoje = new DateTimeImmutable('today');
-
-        if ($dateTime > $hoje) {
-            return throw new InvalidArgumentException('Data não pode ser maior que hoje');
-        }
-
-        $this->dataNascimento = $dateTime;
-
-        return true;
     }
 
     public function dataNascimento(): string
@@ -67,6 +49,62 @@ abstract class Usuario
         return $this->endereco;
     }
 
+    private function validarDataNascimento(string $data, string $formato = 'd/m/Y'): void
+    {
+        $dateTime = DateTimeImmutable::createFromFormat($formato, $data);
+
+        if (!$dateTime || $dateTime->format($formato) != $data) {
+            throw new InvalidArgumentException('Data tem que ser num formato valido');
+        }
+
+        $hoje = new DateTimeImmutable('today');
+
+        if ($dateTime > $hoje) {
+            throw new InvalidArgumentException('Data não pode ser maior que hoje');
+        }
+
+        $this->dataNascimento = $dateTime;
+    }
+
+    public function __toString(): string
+    {
+        return "[{$this->tipo()}] {$this->nome} (id: {$this->cpf()})";
+    }
+
+    abstract public function permissoes(): array;
+
+    /**
+     * Metodo ABSTRATO: cada subclasse (Cliente, Funcionario, Admin) e
+     * OBRIGADA a implementar o proprio "tipo()". 
+     * Isso e usado, por exemplo, para exibir "[Cliente] Joao" no menu.
+     */
+    abstract public function tipo(): string;
+
+
+    /**
+     * toArray()
+     * ---------
+     * Base da "serializacao" do usuario (transformar o objeto num array
+     * simples, pronto pra virar JSON). Cliente usa esta versao sem mudar
+     * nada. Funcionario e Admin SOBRESCREVEM este metodo para acrescentar
+     * o campo "cargo" (veja Funcionario::toArray() abaixo) - isso e
+     * "polimorfismo": cada subclasse decide como se descrever, mas quem
+     * chama $usuario->toArray() nao precisa saber qual subclasse e.
+     */
+    public function toArray(): array
+    {
+        return [
+            "nome" => $this->nomeUsuario(),
+            "cpf" => $this->cpf(),
+            "data_nascimento" => $this->dataNascimento(),
+            "endereco" => $this->endereco(),
+            "tipo" => $this->tipo(),
+        ];
+    }
+
+    /**
+     * Possivelmente estes 2 metodos serao descontinuados:
+     */
     public function pegaQuantidadeLivroPorUsuario(): int
     {
         return $this->qtdLivroUsuario;
@@ -76,6 +114,4 @@ abstract class Usuario
     {
         $this->qtdLivroUsuario = $quantidade;
     }
-
-    abstract public function permissoes(): array;
 }

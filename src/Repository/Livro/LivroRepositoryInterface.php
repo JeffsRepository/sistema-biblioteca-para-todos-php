@@ -20,7 +20,7 @@ interface LivroRepositoryInterface
     public function adicionar(Livro $livro): void;
 
     /**
-     * Retorna null se nao encontrar - por isso o "?Livro".
+     * Retorna null se nao encontrar o "?Livro".
      */
     public function buscarPorIsbn(string $isbn): ?Livro;
 

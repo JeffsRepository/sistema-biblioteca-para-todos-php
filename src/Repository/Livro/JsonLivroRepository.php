@@ -54,13 +54,26 @@ class JsonLivroRepository extends ArmazenamentoJsonAbstrato implements LivroRepo
     /** @var Livro[] */
     public function todos(): array
     {
+        return array_map(
+            fn(array $registro) => $this->converterEmLivro($registro),
+            $this->lerTodosOsRegistros()
+        );
     }
 
     /** @return Livro[] */
     public function disponiveis(): array
     {
+        return array_values(array_filter(
+            $this->todos(),
+            fn(Livro $livro) => $livro->estaDisponivel()
+        ));
     }
 
+    /**
+     * Metodo proprio da classe JsonLivroRepository
+     * para transformar todos os arrays de Livro, em array de
+     * Objeto Livro.
+     */
     private function converterEmLivro(array $registro): Livro
     {
         return Livro::reconstruir(

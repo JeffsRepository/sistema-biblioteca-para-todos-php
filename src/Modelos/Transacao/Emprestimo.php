@@ -43,10 +43,30 @@ class Emprestimo extends Transacao
         return $this->dataDevolucaoReal;
     }
 
+    #[Override]
+    public function getTipo(): string
+    {
+        return Emprestimo::class;
+    }
+
     public function estaAtivo(): bool
     {
         /**Ativo = ainda nao foi devolvido */
         return $this->dataDevolucaoReal === null;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'tipo' => $this->getTipo(),
+            'estado' => $this->estaAtivo(),
+            'livro' => $this->getLivro(),
+            'cliente' => $this->getCliente(),
+            'reponsavel' => $this->getResponsavel(),
+            'data_devolucao_prevista' => $this->getDataDevolucaoPrevista(),
+            'data_devolucao_real' => $this->getDataDevolucaoReal(),
+        ];
+        
     }
 
     /**
@@ -78,5 +98,25 @@ class Emprestimo extends Transacao
             $this->getResponsavel()->nomeUsuario(),
             $status
         );
+    }
+
+    public static function reconstroiEmprestimo(
+        Livro $livro, 
+        Cliente $cliente, 
+        Funcionario $responsavel,
+        \DateTimeImmutable $dataDevolucaoPrevista,
+        ?\DateTimeImmutable $dataDevolucaoReal = null
+    ): self
+    {
+        $emprestimo = new self(
+            $livro, 
+            $cliente, 
+            $responsavel, 
+            $dataDevolucaoPrevista,
+        );
+
+        $emprestimo->dataDevolucaoReal = $dataDevolucaoReal;
+
+        return $emprestimo;
     }
 }

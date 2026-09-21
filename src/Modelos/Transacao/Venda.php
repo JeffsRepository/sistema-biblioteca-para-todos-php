@@ -32,6 +32,24 @@ class Venda extends Transacao
     }
 
     #[Override]
+    public function getTipo(): string
+    {
+        return Venda::class;
+    }
+
+    #[Override]
+    public function toArray(): array
+    {
+        return [
+            'tipo' => $this->getTipo(),
+            'livro' => $this->getLivro(),
+            'cliente' => $this->getCliente(),
+            'reponsavel' => $this->getResponsavel(),
+            'preco_venda' => $this->preco,
+        ];
+    }
+
+    #[Override]
     public function resumo(): string
     {
         return sprintf(
@@ -41,5 +59,17 @@ class Venda extends Transacao
             $this->getCliente()->nomeUsuario(),
             $this->getResponsavel()->nomeUsuario(),
         );
+    }
+
+    public static function reconstroiVenda(array $transacao): self
+    {
+        $venda = new self(
+            livro: $transacao['livro'],
+            cliente: $transacao['cliente'],
+            responsavel: $transacao['responsavel'],
+            preco: $transacao['preco'],
+        );
+
+        return $venda;
     }
 }

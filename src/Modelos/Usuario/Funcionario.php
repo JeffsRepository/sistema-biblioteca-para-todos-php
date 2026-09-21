@@ -7,7 +7,6 @@ use Override;
 
 class Funcionario extends Usuario
 {
-    #[Override]
     public function __construct(
         string $nome, 
         DateTimeImmutable $dataNascimento, 

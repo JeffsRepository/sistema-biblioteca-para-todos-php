@@ -1,0 +1,79 @@
+## APENAS TEMPORARIO PARA VER O EMPRESTIMO DE LIVRO ##
+
+Array
+(
+    [tipo] => App\Biblioteca\Modelos\Transacao\Emprestimo
+    [estado] => 1
+    [livro] => App\Biblioteca\Modelos\Livros\Livro Object
+        (
+            [estado:App\Biblioteca\Modelos\Livros\Livro:private] => App\Biblioteca\Modelos\Livros\EstadoLivro Enum:string
+                (
+                    [name] => DISPONIVEL
+                    [value] => disponivel
+                )
+
+            [nome:App\Biblioteca\Modelos\Livros\Livro:private] => O Senhor dos Anéis
+            [autor:App\Biblioteca\Modelos\Livros\Livro:private] => J.R.R. Tolkien
+            [isbn:App\Biblioteca\Modelos\Livros\Livro:private] => App\Biblioteca\Modelos\Livros\Isbn Object
+                (
+                    [isbn:App\Biblioteca\Modelos\Livros\Isbn:private] => 9783161484100
+                )
+
+        )
+
+    [cliente] => App\Biblioteca\Modelos\Usuario\Cliente Object
+        (
+            [qtdLivroUsuario:protected] => 0
+            [nome:protected] => pacheco
+            [dataNascimento:protected] => DateTimeImmutable Object
+                (
+                    [date] => 1996-09-07 19:44:22.000000
+                    [timezone_type] => 3
+                    [timezone] => Europe/Berlin
+                )
+
+            [cpf:protected] => App\Biblioteca\Modelos\Usuario\Cpf Object
+                (
+                    [cpf:App\Biblioteca\Modelos\Usuario\Cpf:private] => 12345678901
+                )
+
+            [endereco:protected] => maria pacheco dos santos
+            [livrosEmprestados:App\Biblioteca\Modelos\Usuario\Cliente:private] => Array
+                (
+                )
+
+            [livrosComprados:App\Biblioteca\Modelos\Usuario\Cliente:private] => Array
+                (
+                )
+
+        )
+
+    [reponsavel] => App\Biblioteca\Modelos\Usuario\Funcionario Object
+        (
+            [qtdLivroUsuario:protected] => 0
+            [nome:protected] => funcionario
+            [dataNascimento:protected] => DateTimeImmutable Object
+                (
+                    [date] => 1996-09-07 19:44:22.000000
+                    [timezone_type] => 3
+                    [timezone] => Europe/Berlin
+                )
+
+            [cpf:protected] => App\Biblioteca\Modelos\Usuario\Cpf Object
+                (
+                    [cpf:App\Biblioteca\Modelos\Usuario\Cpf:private] => 12345678901
+                )
+
+            [endereco:protected] => rua domingos barroso
+            [cargo:App\Biblioteca\Modelos\Usuario\Funcionario:private] => funcionario
+        )
+
+    [data_devolucao] => DateTimeImmutable Object
+        (
+            [date] => 1996-09-07 00:00:00.000000
+            [timezone_type] => 3
+            [timezone] => Europe/Berlin
+        )
+
+    [data_devolucao_real] => 
+)

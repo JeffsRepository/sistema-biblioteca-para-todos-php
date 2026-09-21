@@ -40,5 +40,9 @@ abstract class Transacao
         return $this->data;
     }
 
+    abstract public function getTipo(): string;
+
     abstract public function resumo(): string;
+
+    abstract public function toArray(): array;
 }

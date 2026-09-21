@@ -8,6 +8,7 @@ composer dump-autoload
 use App\Biblioteca\Modelos\Biblioteca\Biblioteca;
 use App\Biblioteca\Modelos\Livros\Isbn;
 use App\Biblioteca\Modelos\Livros\Livro;
+use App\Biblioteca\Modelos\Transacao\Emprestimo;
 use App\Biblioteca\Modelos\Usuario\Cliente;
 use App\Biblioteca\Modelos\Usuario\Cpf;
 use App\Biblioteca\Modelos\Usuario\Funcionario;
@@ -70,7 +71,8 @@ $usuarioFuncionario = new Funcionario(
     'funcionario',
     new \DateTimeImmutable('09/07/1996'),
     new Cpf('12345678901'),
-    'rua domingos barroso'
+    'rua domingos barroso',
+    'funcionario'
 );
 
 //-------BIBLIOTECA-------------
@@ -78,6 +80,13 @@ $biblioteca = new Biblioteca(
     'Biblioteca para todos',
     '123.123.123/0001-01'
 );
+
+$transacao = new Emprestimo($livro1, $usuarioCliente, $usuarioFuncionario, new \DateTimeImmutable('09/07/1996'));
+//echo $transacao->getTipo();
+$teste = $transacao->toArray();
+if ($teste['livro']->getEstado() === $livro1->getEstado()) {
+    print_r([$teste['livro']->getEstado(), $livro1->getEstado()]);
+}
 //-----FIM-BIBLIOTECA-----------
 /* 
 //LIVRO REPOSITORY:

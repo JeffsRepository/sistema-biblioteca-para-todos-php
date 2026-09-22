@@ -2,12 +2,6 @@
 
 namespace App\Biblioteca\Exeception\Usuarios;
 
-use Exception;
-
-class UsuarioNaoEncontrado extends Exception
+class UsuarioNaoEncontrado extends \RuntimeException
 {
-    public function __construct()
-    {
-        throw new Exception('Usuario não encontrado');
-    }
 }

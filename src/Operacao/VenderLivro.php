@@ -9,8 +9,8 @@ use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Transacao\Venda;
 use App\Biblioteca\Modelos\Usuario\Cliente;
 use App\Biblioteca\Modelos\Usuario\Funcionario;
+use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 use App\Biblioteca\Repository\Transacao\TransacaoRepositoryInterface;
-use App\Repository\LivroRepositoryInterface;
 use Override;
 
 class VenderLivro implements OperacaoInterface

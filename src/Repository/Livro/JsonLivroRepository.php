@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Biblioteca\Repository\Livro;
 
+use App\Biblioteca\Modelos\Livros\EstadoLivro;
 use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Repository\ArmazenamentoJsonAbstrato;
-use App\Repository\LivroRepositoryInterface;
+use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 
 class JsonLivroRepository extends ArmazenamentoJsonAbstrato implements LivroRepositoryInterface
 {
@@ -80,7 +81,7 @@ class JsonLivroRepository extends ArmazenamentoJsonAbstrato implements LivroRepo
             isbn: $registro['isbn'],
             nome: $registro['nome'],
             autor: $registro['autor'],
-            estado: $registro['estado'],
+            estado: EstadoLivro::from($registro['estado']),
         );
     }
 }

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace App\Biblioteca\Repository\Usuario;
+
 use App\Biblioteca\Factory\UsuarioFactory;
 use App\Biblioteca\Modelos\Usuario\Usuario;
 use App\Biblioteca\Repository\ArmazenamentoJsonAbstrato;
@@ -24,7 +26,7 @@ use App\Biblioteca\Repository\Usuario\UsuarioRepositoryInterface;
  */
 class JsonUsuarioRepository extends ArmazenamentoJsonAbstrato implements UsuarioRepositoryInterface
 {
-    #[Override]
+
     public function __construct(
         private readonly string $caminhoArquivo,
         private readonly UsuarioFactory $usuario_factory = new UsuarioFactory(),
@@ -32,7 +34,6 @@ class JsonUsuarioRepository extends ArmazenamentoJsonAbstrato implements Usuario
         return parent::__construct($caminhoArquivo);
     }
 
-    #[Override]
     public function adicionar(Usuario $usuario): void
     {
         $registros = $this->lerTodosOsRegistros();
@@ -48,7 +49,6 @@ class JsonUsuarioRepository extends ArmazenamentoJsonAbstrato implements Usuario
         $this->salvarTodosOsRegistros($registros);
     }
 
-    #[Override]
     public function buscarPorCpf(string $cpf): ?Usuario
     {
         foreach($this->lerTodosOsRegistros() as $registro) {
@@ -60,7 +60,6 @@ class JsonUsuarioRepository extends ArmazenamentoJsonAbstrato implements Usuario
         return null;
     }
 
-    #[Override]
     public function todos(): array
     {
         return array_map(

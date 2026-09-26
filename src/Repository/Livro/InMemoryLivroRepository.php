@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Biblioteca\Repository\Livro;
 
 use App\Biblioteca\Modelos\Livros\Livro;
-use App\Repository\LivroRepositoryInterface;
 use Override;
 
 class InMemoryLivroRepository implements LivroRepositoryInterface

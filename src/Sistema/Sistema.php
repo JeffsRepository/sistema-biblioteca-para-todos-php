@@ -15,9 +15,10 @@ use App\Biblioteca\Modelos\Usuario\Usuario;
 use App\Biblioteca\Operacao\DevolverLivro;
 use App\Biblioteca\Operacao\EmprestarLivro;
 use App\Biblioteca\Operacao\VenderLivro;
+use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 use App\Biblioteca\Repository\Transacao\TransacaoRepositoryInterface;
 use App\Biblioteca\Repository\Usuario\UsuarioRepositoryInterface;
-use App\Repository\LivroRepositoryInterface;
+
 
 class Sistema
 {

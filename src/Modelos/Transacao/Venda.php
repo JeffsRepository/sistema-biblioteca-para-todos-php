@@ -44,8 +44,20 @@ class Venda extends Transacao
             'tipo' => $this->getTipo(),
             'livro' => $this->getLivro(),
             'cliente' => $this->getCliente(),
-            'reponsavel' => $this->getResponsavel(),
+            'responsavel' => $this->getResponsavel(),
             'preco_venda' => $this->preco,
+        ];
+    }
+
+    #[Override]
+    public function jsonSerialize(): array
+    {
+        return [
+            'tipo' => $this->getTipo(),
+            'livro' => $this->getLivro(),
+            'cliente' => $this->getCliente(),
+            'responsavel' => $this->getResponsavel(),
+            'preco_venda' => $this->preco
         ];
     }
 

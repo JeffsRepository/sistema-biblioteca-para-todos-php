@@ -1,0 +1,56 @@
+array(7) {
+  ["tipo"]=>
+  string(43) "App\Biblioteca\Modelos\Transacao\Emprestimo"
+  ["estado"]=>
+  bool(true)
+  ["livro"]=>
+  array(4) {
+    ["isbn"]=>
+    string(13) "1234567890123"
+    ["nome"]=>
+    string(27) "o retorno dos que nao foram"
+    ["autor"]=>
+    string(17) "braulix alexandro"
+    ["estado"]=>
+    string(10) "emprestado"
+  }
+  ["cliente"]=>
+  array(5) {
+    ["nome"]=>
+    string(14) "jeffersonmenes"
+    ["cpf"]=>
+    string(11) "54637289098"
+    ["data_nascimento"]=>
+    string(10) "08/09/1998"
+    ["endereco"]=>
+    string(9) "asdjhasdf"
+    ["tipo"]=>
+    string(7) "Cliente"
+  }
+  ["reponsavel"]=>
+  array(6) {
+    ["nome"]=>
+    string(9) "jefferson"
+    ["cpf"]=>
+    string(11) "12345678901"
+    ["data_nascimento"]=>
+    string(10) "09/08/1999"
+    ["endereco"]=>
+    string(24) "maria da pacheco batista"
+    ["tipo"]=>
+    string(11) "Funcionario"
+    ["cargo"]=>
+    string(10) "balconista"
+  }
+  ["data_devolucao_prevista"]=>
+  array(3) {
+    ["date"]=>
+    string(26) "2026-11-11 18:40:35.191061"
+    ["timezone_type"]=>
+    int(3)
+    ["timezone"]=>
+    string(13) "Europe/Berlin"
+  }
+  ["data_devolucao_real"]=>
+  NULL
+}

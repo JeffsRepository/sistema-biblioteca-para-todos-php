@@ -21,4 +21,6 @@ interface TransacaoRepositoryInterface
      * "qual emprestimo devo marcar como devolvido?".
      */
     public function buscarEmprestimoAtivoPorLivro(Livro $livro): ?Emprestimo;
+
+    public function atualizarTransacao(Livro $livro, Transacao $transacao): void;
 }

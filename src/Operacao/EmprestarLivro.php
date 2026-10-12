@@ -9,6 +9,7 @@ use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Transacao\Emprestimo;
 use App\Biblioteca\Modelos\Usuario\Cliente;
 use App\Biblioteca\Modelos\Usuario\Funcionario;
+use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 use App\Biblioteca\Repository\Transacao\TransacaoRepositoryInterface;
 
 /**
@@ -33,6 +34,7 @@ class EmprestarLivro implements OperacaoInterface
 {
     public function __construct(
         private readonly TransacaoRepositoryInterface $transacoes,
+        private readonly LivroRepositoryInterface $livros,
         private readonly Livro $livro,
         private readonly Cliente $cliente,
         private readonly Funcionario $responsavel,
@@ -48,7 +50,7 @@ class EmprestarLivro implements OperacaoInterface
             ");
         }
 
-        // 1) O livro muda de estado
+        // 1) O livro muda de estado: Emprestado
         $this->livro->marcarComoEmprestado();
 
         // 2) O cliente passa a ter esse livro
@@ -63,5 +65,8 @@ class EmprestarLivro implements OperacaoInterface
         );
 
         $this->transacoes->registrar($emprestimo);
+        
+        // chamar o lerTodosOsRegistros e preciso passar o registro do livro com estado atualizado para o arquivo.
+        $this->livros->atualizarEstadoLivroNoArquivo($this->livro);
     }
 }

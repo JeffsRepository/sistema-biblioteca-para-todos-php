@@ -3,8 +3,9 @@
 namespace App\Biblioteca\Modelos\Livros;
 
 use DomainException;
+use Override;
 
-class Isbn
+class Isbn implements \JsonSerializable
 {
     private string $isbn;
 
@@ -47,6 +48,12 @@ class Isbn
     }*/
 
     public function __toString()
+    {
+        return $this->isbn;
+    }
+
+    #[Override]
+    public function jsonSerialize(): string
     {
         return $this->isbn;
     }

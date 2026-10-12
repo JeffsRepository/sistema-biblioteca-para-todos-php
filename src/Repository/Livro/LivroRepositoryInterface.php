@@ -31,4 +31,6 @@ interface LivroRepositoryInterface
 
     /** @return Livro[] */
     public function disponiveis(): array;
+
+    public function atualizarEstadoLivroNoArquivo(Livro $livro): void;
 }

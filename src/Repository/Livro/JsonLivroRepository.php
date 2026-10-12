@@ -23,7 +23,7 @@ class JsonLivroRepository extends ArmazenamentoJsonAbstrato implements LivroRepo
             }
         }
 
-        $registros[] = $livro->toArray();
+        $registros[] = $livro->jsonSerialize();
         $this->salvarTodosOsRegistros($registros);
     }
 
@@ -83,5 +83,19 @@ class JsonLivroRepository extends ArmazenamentoJsonAbstrato implements LivroRepo
             autor: $registro['autor'],
             estado: EstadoLivro::from($registro['estado']),
         );
+    }
+
+    public function atualizarEstadoLivroNoArquivo(Livro $livro): void
+    {
+        $livros = $this->lerTodosOsRegistros();
+
+        foreach($livros as &$livroAtual) {
+            if($livroAtual['isbn'] === $livro->isbnLivro()) {
+                $livroAtual = $livro->jsonSerialize();
+                break;
+            }
+        }
+
+        $this->salvarTodosOsRegistros($livros);
     }
 }

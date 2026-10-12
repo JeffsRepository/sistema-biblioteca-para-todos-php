@@ -8,7 +8,7 @@ use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Usuario\Cliente;
 use App\Biblioteca\Modelos\Usuario\Funcionario;
 
-abstract class Transacao
+abstract class Transacao implements \JsonSerializable
 {
     private readonly \DateTimeImmutable $data;
 
@@ -45,4 +45,6 @@ abstract class Transacao
     abstract public function resumo(): string;
 
     abstract public function toArray(): array;
+
+    abstract public function jsonSerialize(): array;
 }

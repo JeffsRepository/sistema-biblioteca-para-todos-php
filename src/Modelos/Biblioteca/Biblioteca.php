@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Biblioteca\Modelos\Biblioteca;
 
-use App\Biblioteca\Modelos\Livros\Livro;
-
 class Biblioteca
 {
     public function __construct(

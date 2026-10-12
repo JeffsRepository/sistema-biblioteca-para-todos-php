@@ -8,6 +8,7 @@ use App\Biblioteca\Exeception\Livros\LivroIndisponivelException;
 use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Usuario\Cliente;
 use App\Biblioteca\Modelos\Usuario\Funcionario;
+use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 use App\Biblioteca\Repository\Transacao\TransacaoRepositoryInterface;
 use Exception;
 use Override;
@@ -25,6 +26,7 @@ class DevolverLivro implements OperacaoInterface
 {
     public function __construct(
         private readonly TransacaoRepositoryInterface $transacao,
+        private readonly LivroRepositoryInterface $livros,
         private readonly Livro $livro,
     ){
     }
@@ -44,8 +46,10 @@ class DevolverLivro implements OperacaoInterface
             throw new LivroIndisponivelException('Emprestimo não encontrado');
         }
 
-        $emprestimo->registrarDevolucao();
-        $this->livro->marcarComoDevolvido();
-        $emprestimo->getCliente()->removerLivroEmprestado($this->livro);
+        $emprestimo->registrarDevolucao(); // anotar a data de devolucao e alterar o estado do emprestimo
+        $this->livro->marcarComoDevolvido(); // vai se marcar como devolvido
+        $emprestimo->getCliente()->removerLivroEmprestado($this->livro); // esse livro vai ser removido do array do cliente
+        $this->livros->atualizarEstadoLivroNoArquivo($this->livro); // alterar o estado do livro como disponivel no banco
+        
     }
 }

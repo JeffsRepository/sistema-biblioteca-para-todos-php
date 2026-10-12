@@ -34,15 +34,17 @@ abstract class ArmazenamentoJsonAbstrato
      */
     private function garantirQueArquivoExiste(): void
     {
+        // O dirname removeu o ultimo arquivo injetado no parametro: /livros.json
+        // Ex.: "C:\Users\Jefferson Meneses\OneDrive\Documentos\sistema-biblioteca-para-todos-php\bin/../data"
         $pasta = dirname($this->caminhoArquivo);
 
         if(!is_dir($pasta)) {
             // "true" recursivo = cria pastas intermediarias tambem, se
             // precisar (ex: data/ dentro do projeto).
-            mkdir($this->caminhoArquivo, 0777, true);
+            mkdir($pasta, 0777, true);
         }
 
-        if(!file_exists($this->caminhoArquivo)) {
+        if(!file_exists($pasta)) {
             file_put_contents($this->caminhoArquivo, '[]');
         }
     }
@@ -57,7 +59,7 @@ abstract class ArmazenamentoJsonAbstrato
     protected function lerTodosOsRegistros(): array
     {
         $conteudo = file_get_contents($this->caminhoArquivo);
-
+        
         if($conteudo === false || trim($conteudo) === '') {
             return [];
         }

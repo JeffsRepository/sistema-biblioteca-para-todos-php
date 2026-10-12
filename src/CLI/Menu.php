@@ -11,7 +11,6 @@ use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Usuario\Admin;
 use App\Biblioteca\Modelos\Usuario\Cliente;
 use App\Biblioteca\Modelos\Usuario\Funcionario;
-use App\Biblioteca\Operacao\EmprestarLivro;
 use App\Biblioteca\Sistema\Sistema;
 
 /**

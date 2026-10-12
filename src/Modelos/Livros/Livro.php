@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Biblioteca\Modelos\Livros;
 
 use App\Biblioteca\Modelos\Livros\EstadoLivro;
+use Override;
 
-class Livro
+class Livro implements \JsonSerializable
 {
     private EstadoLivro $estado;
 
@@ -40,7 +41,7 @@ class Livro
 
     public function estaDisponivel(): bool
     {
-        return $this->estado === EstadoLivro::DISPONIVEL;
+        return $this->getEstado() === EstadoLivro::DISPONIVEL;
     }
 
     public function marcarComoEmprestado(): void
@@ -96,6 +97,17 @@ class Livro
      * JSON. Isso e chamado de "serializar".
      */
     public function toArray(): array
+    {
+        return [
+            "isbn" => $this->isbnLivro(),
+            "nome" => $this->nomeLivro(),
+            "autor" => $this->autorLivro(),
+            "estado" => $this->getEstado(),
+        ];
+    }
+
+    #[Override]
+    public function jsonSerialize(): array
     {
         return [
             "isbn" => $this->isbnLivro(),

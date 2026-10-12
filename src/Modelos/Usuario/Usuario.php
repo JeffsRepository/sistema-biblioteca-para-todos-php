@@ -7,8 +7,9 @@ namespace App\Biblioteca\Modelos\Usuario;
 use DateTime;
 use DateTimeImmutable;
 use InvalidArgumentException;
+use Override;
 
-abstract class Usuario
+abstract class Usuario implements \JsonSerializable
 {
     protected int $qtdLivroUsuario = 0;
 
@@ -101,6 +102,26 @@ abstract class Usuario
             "tipo" => $this->tipo(),
         ];
     }
+
+    #[Override]
+    public function jsonSerialize(): array
+    {
+        return [
+            "nome" => $this->nomeUsuario(),
+            "cpf" => $this->cpf(),
+            "data_nascimento" => $this->dataNascimento(),
+            "endereco" => $this->endereco(),
+            "tipo" => $this->tipo(),
+        ];
+    }
+
+    abstract public static function reconstruir(
+        string $nome,
+        string $dataNascimento,
+        string $cpf,
+        string $endereco,
+        string $cargo
+    ): ?self;
 
     /**
      * Possivelmente estes 2 metodos serao descontinuados:

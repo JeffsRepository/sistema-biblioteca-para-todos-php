@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace App\Biblioteca\Repository\Transacao;
 
+use App\Biblioteca\Modelos\Livros\EstadoLivro;
+use App\Biblioteca\Modelos\Livros\Isbn;
 use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Transacao\Emprestimo;
 use App\Biblioteca\Modelos\Transacao\Transacao;
+use App\Biblioteca\Modelos\Usuario\Cliente;
+use App\Biblioteca\Modelos\Usuario\Funcionario;
 use App\Biblioteca\Repository\ArmazenamentoJsonAbstrato;
 use Override;
 
 class JsonTransacaoRepository extends ArmazenamentoJsonAbstrato implements TransacaoRepositoryInterface
 {
-    private ?string $tipo = null;
-
     #[Override]
     public function registrar(Transacao $transacao): void
     {
         $registros = $this->lerTodosOsRegistros();
-        $registros[] = $transacao->toArray();
+        $registros[] = $transacao->jsonSerialize();
+        $this->salvarTodosOsRegistros($registros);
     }
 
     #[Override]
@@ -38,7 +41,7 @@ class JsonTransacaoRepository extends ArmazenamentoJsonAbstrato implements Trans
             if(
                 $transacao['tipo'] === $tipo 
                 && $transacao['estado']
-                && ($transacao['livro']->isbnLivro()
+                && ($transacao['livro']['isbn']
                     === 
                 $livro->isbnLivro())
             ) {
@@ -49,20 +52,62 @@ class JsonTransacaoRepository extends ArmazenamentoJsonAbstrato implements Trans
         return null;
     }
 
-    private function converteEmEmprestimo(array $transacao): Emprestimo
+    #[Override]
+    public function atualizarTransacao(Livro $livro, Transacao $transacao): void
     {
-        return Emprestimo::reconstroiEmprestimo(
-            livro: $transacao['livro'],
-            cliente: $transacao['cliente'],
-            responsavel: $transacao['responsavel'],
-            dataDevolucaoPrevista: $transacao['data_devolucao_prevista'],
-            dataDevolucaoReal: $transacao['data_devolucao_real']
-        );
+        $registros = $this->lerTodosOsRegistros();
+
+        foreach($registros as &$registroAtual) {
+            if(
+                $registroAtual['tipo'] === Emprestimo::class
+                && $registroAtual['estado']
+                && ($registroAtual['livro']['isbn']
+                    === 
+                $livro->isbnLivro())
+            ) {
+                $registroAtual = $transacao->jsonSerialize();
+            }
+        }
+
+        $this->salvarTodosOsRegistros($registros);
     }
 
-    // {no usages}
-    private function getTipo(): ?string
+    private function converteEmEmprestimo(array $transacao): Emprestimo
     {
-        return $this->tipo;
+        $livro = Livro::reconstruir(
+            isbn: $transacao['livro']['isbn'],
+            nome: $transacao['livro']['nome'],
+            autor: $transacao['livro']['autor'],
+            estado: EstadoLivro::tryFrom($transacao['livro']['estado']),
+        );
+
+        $cliente = Cliente::reconstruir(
+            nome: $transacao['cliente']['nome'],
+            dataNascimento: $transacao['cliente']['data_nascimento'],
+            cpf: $transacao['cliente']['cpf'],
+            endereco: $transacao['cliente']['endereco'],
+        );
+
+        $responsavel = Funcionario::reconstruir(
+            nome: $transacao['reponsavel']['nome'],
+            dataNascimento: $transacao['reponsavel']['data_nascimento'],
+            cpf: $transacao['reponsavel']['cpf'],
+            endereco: $transacao['reponsavel']['endereco'],
+            cargo: $transacao['reponsavel']['cargo']
+        );
+
+        $dataDevolucaoPrevista = new \DateTimeImmutable($transacao['data_devolucao_prevista']['date']);
+        
+        $dataDevolucaoReal  = $transacao['data_devolucao_real']
+        ? new \DateTimeImmutable($transacao['data_devolucao_real'])
+        : null;
+
+        return Emprestimo::reconstroiEmprestimo(
+            $livro,
+            $cliente,
+            $responsavel,
+            $dataDevolucaoPrevista,
+            $dataDevolucaoReal,
+        );
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Biblioteca\Modelos\Livros;
 
-enum EstadoLivro: string
+use Override;
+
+enum EstadoLivro: string  implements \JsonSerializable
 {
     case DISPONIVEL = 'disponivel';
     case EMPRESTADO = 'emprestado';
@@ -15,5 +17,11 @@ enum EstadoLivro: string
             self::EMPRESTADO => 'emprestado',
             self::VENDIDO => 'vendido'
         };
+    }
+
+    #[Override]
+    public function jsonSerialize(): string
+    {
+        return $this->value;
     }
 }

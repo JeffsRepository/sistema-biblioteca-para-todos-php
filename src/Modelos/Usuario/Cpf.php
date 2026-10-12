@@ -3,8 +3,9 @@
 namespace App\Biblioteca\Modelos\Usuario;
 
 use DomainException;
+use Override;
 
-class Cpf
+class Cpf implements \JsonSerializable
 {
     private string $cpf;
 
@@ -13,13 +14,19 @@ class Cpf
         $cpf = trim(str_replace(['.', '-'], '', $cpf));
 
         if (strlen($cpf) !== 11 || !ctype_digit($cpf) ) {
-            return throw new DomainException('O cpf precisa ser valido');
+            throw new DomainException('O cpf precisa ser valido');
         }
 
         $this->cpf = $cpf;
     }
 
     public function __toString()
+    {
+        return $this->cpf;
+    }
+
+    #[Override]
+    public function jsonSerialize(): string
     {
         return $this->cpf;
     }

@@ -31,14 +31,16 @@ use App\Biblioteca\CLI\Menu;
 use App\Biblioteca\Factory\UsuarioFactory;
 use App\Biblioteca\Repository\Livro\JsonLivroRepository;
 use App\Biblioteca\Repository\Transacao\InMemoryRepository;
+use App\Biblioteca\Repository\Transacao\JsonTransacaoRepository;
 use App\Biblioteca\Repository\Usuario\JsonUsuarioRepository;
 use App\Biblioteca\Sistema\Sistema;
 
+// C:\Users\Jefferson Meneses\OneDrive\Documentos\sistema-biblioteca-para-todos-php\bin/../data
 $pastaDeDados = __DIR__ . '/../data';
 
 $repositorioDeLivros = new JsonLivroRepository($pastaDeDados . '/livros.json');
 $repositorioDeUsuarios = new JsonUsuarioRepository($pastaDeDados . '/usuarios.json');
-$repositorioDeTransacoes = new InMemoryRepository();
+$repositorioDeTransacoes = new JsonTransacaoRepository($pastaDeDados . '/transacoes.json');
 
 $sistema = new Sistema($repositorioDeLivros, $repositorioDeTransacoes, $repositorioDeUsuarios);
 

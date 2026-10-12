@@ -62,11 +62,24 @@ class Emprestimo extends Transacao
             'estado' => $this->estaAtivo(),
             'livro' => $this->getLivro(),
             'cliente' => $this->getCliente(),
-            'reponsavel' => $this->getResponsavel(),
+            'responsavel' => $this->getResponsavel(),
             'data_devolucao_prevista' => $this->getDataDevolucaoPrevista(),
             'data_devolucao_real' => $this->getDataDevolucaoReal(),
         ];
-        
+    }
+
+    #[Override]
+    public function jsonSerialize(): array
+    {
+        return [
+            'tipo' => $this->getTipo(),
+            'estado' => $this->estaAtivo(),
+            'livro' => $this->getLivro(),
+            'cliente' => $this->getCliente(),
+            'responsavel' => $this->getResponsavel(),
+            'data_devolucao_prevista' => $this->getDataDevolucaoPrevista(),
+            'data_devolucao_real' => $this->getDataDevolucaoReal(),
+        ];
     }
 
     /**

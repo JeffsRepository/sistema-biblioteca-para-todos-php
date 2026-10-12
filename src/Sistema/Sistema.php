@@ -89,6 +89,7 @@ class Sistema
         
         $operacao = new EmprestarLivro(
             $this->transacoes,
+            $this->livros,
             $livro,
             $cliente,
             $responsavel,
@@ -102,7 +103,7 @@ class Sistema
     {
         $livro = $this->buscarLivro($isbn);
 
-        $operacao = new DevolverLivro($this->transacoes, $livro);
+        $operacao = new DevolverLivro($this->transacoes, $this->livros, $livro);
         $operacao->executar();
     }
 

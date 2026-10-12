@@ -68,4 +68,21 @@ class Cliente extends Usuario
     {
         return [];
     }
+
+    #[Override]
+    public static function reconstruir(
+        string $nome,
+        string $dataNascimento,
+        string $cpf,
+        string $endereco,
+        string $cargo = '',
+    ): ?Usuario {
+
+        return new self (
+            $nome, 
+            new \DateTimeImmutable($dataNascimento), 
+            new Cpf($cpf), 
+            $endereco
+        );
+    }
 }

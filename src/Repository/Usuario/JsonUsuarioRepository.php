@@ -45,7 +45,7 @@ class JsonUsuarioRepository extends ArmazenamentoJsonAbstrato implements Usuario
             }
         }
 
-        $registros[] = $usuario->toArray();
+        $registros[] = $usuario->jsonSerialize();
         $this->salvarTodosOsRegistros($registros);
     }
 

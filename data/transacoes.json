@@ -1,33 +1,37 @@
 [
     {
         "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Emprestimo",
-        "estado": true,
+        "estado": false,
         "livro": {
             "isbn": "1234567890123",
-            "nome": "o retorno dos que nao foram",
-            "autor": "braulix alexandro",
+            "nome": "Os Luziadas",
+            "autor": "Mauro Pacheco",
             "estado": "emprestado"
         },
         "cliente": {
-            "nome": "jeffersonmenes",
-            "cpf": "54637289098",
-            "data_nascimento": "08\/09\/1998",
-            "endereco": "asdjhasdf",
+            "nome": "Rodrigo Pacheco Nunes",
+            "cpf": "12345678901",
+            "data_nascimento": "09\/09\/1999",
+            "endereco": "Maria Barroso de Castro Silva",
             "tipo": "Cliente"
         },
-        "reponsavel": {
-            "nome": "jefferson",
-            "cpf": "12345678901",
-            "data_nascimento": "09\/08\/1999",
-            "endereco": "maria da pacheco batista",
+        "responsavel": {
+            "nome": "Jefferson Meneses",
+            "cpf": "98765432101",
+            "data_nascimento": "09\/09\/1997",
+            "endereco": "Maria Barbosa Manharas",
             "tipo": "Funcionario",
-            "cargo": "balconista"
+            "cargo": "admin"
         },
         "data_devolucao_prevista": {
-            "date": "2026-11-11 18:40:35.191061",
+            "date": "2026-11-12 00:26:37.631021",
             "timezone_type": 3,
             "timezone": "Europe\/Berlin"
         },
-        "data_devolucao_real": null
+        "data_devolucao_real": {
+            "date": "2026-10-13 00:33:26.366231",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        }
     }
 ]

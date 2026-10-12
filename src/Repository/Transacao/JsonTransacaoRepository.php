@@ -89,11 +89,11 @@ class JsonTransacaoRepository extends ArmazenamentoJsonAbstrato implements Trans
         );
 
         $responsavel = Funcionario::reconstruir(
-            nome: $transacao['reponsavel']['nome'],
-            dataNascimento: $transacao['reponsavel']['data_nascimento'],
-            cpf: $transacao['reponsavel']['cpf'],
-            endereco: $transacao['reponsavel']['endereco'],
-            cargo: $transacao['reponsavel']['cargo']
+            nome: $transacao['responsavel']['nome'],
+            dataNascimento: $transacao['responsavel']['data_nascimento'],
+            cpf: $transacao['responsavel']['cpf'],
+            endereco: $transacao['responsavel']['endereco'],
+            cargo: $transacao['responsavel']['cargo']
         );
 
         $dataDevolucaoPrevista = new \DateTimeImmutable($transacao['data_devolucao_prevista']['date']);

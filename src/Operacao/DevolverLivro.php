@@ -50,6 +50,7 @@ class DevolverLivro implements OperacaoInterface
         $this->livro->marcarComoDevolvido(); // vai se marcar como devolvido
         $emprestimo->getCliente()->removerLivroEmprestado($this->livro); // esse livro vai ser removido do array do cliente
         $this->livros->atualizarEstadoLivroNoArquivo($this->livro); // alterar o estado do livro como disponivel no banco
+        $this->transacao->atualizarTransacao($this->livro, $emprestimo);
         
     }
 }

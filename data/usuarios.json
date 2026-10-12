@@ -1,24 +1,17 @@
 [
     {
-        "nome": "jefferson",
+        "nome": "Rodrigo Pacheco Nunes",
         "cpf": "12345678901",
-        "data_nascimento": "08\/09\/1999",
-        "endereco": "maria da pacheco batista",
+        "data_nascimento": "09\/09\/1999",
+        "endereco": "Maria Barroso de Castro Silva",
+        "tipo": "Cliente"
+    },
+    {
+        "nome": "Jefferson Meneses",
+        "cpf": "98765432101",
+        "data_nascimento": "09\/09\/1997",
+        "endereco": "Maria Barbosa Manharas",
         "tipo": "Funcionario",
-        "cargo": "balconista"
-    },
-    {
-        "nome": "roberto avestruz",
-        "cpf": "09876543211",
-        "data_nascimento": "08\/09\/1999",
-        "endereco": "rua maria barbosa de castro",
-        "tipo": "Cliente"
-    },
-    {
-        "nome": "jeffersonmenes",
-        "cpf": "54637289098",
-        "data_nascimento": "09\/08\/1998",
-        "endereco": "asdjhasdf",
-        "tipo": "Cliente"
+        "cargo": "admin"
     }
 ]

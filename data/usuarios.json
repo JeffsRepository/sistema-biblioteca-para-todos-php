@@ -1,17 +1,17 @@
 [
     {
-        "nome": "Rodrigo Pacheco Nunes",
+        "nome": "Algusto Barim da Silva",
         "cpf": "12345678901",
-        "data_nascimento": "09\/09\/1999",
-        "endereco": "Maria Barroso de Castro Silva",
+        "data_nascimento": "09\/09\/1985",
+        "endereco": "Maria Das Dores Cunha",
         "tipo": "Cliente"
     },
     {
-        "nome": "Jefferson Meneses",
-        "cpf": "98765432101",
-        "data_nascimento": "09\/09\/1997",
-        "endereco": "Maria Barbosa Manharas",
+        "nome": "Jefferson",
+        "cpf": "12345678012",
+        "data_nascimento": "09\/09\/1999",
+        "endereco": "Maria Pacheco Da Silva",
         "tipo": "Funcionario",
-        "cargo": "admin"
+        "cargo": "Admin"
     }
 ]

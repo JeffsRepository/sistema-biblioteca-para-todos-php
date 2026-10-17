@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Biblioteca\Repository\Transacao;
 
 use App\Biblioteca\Modelos\Livros\EstadoLivro;
-use App\Biblioteca\Modelos\Livros\Isbn;
 use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Transacao\Emprestimo;
 use App\Biblioteca\Modelos\Transacao\Transacao;

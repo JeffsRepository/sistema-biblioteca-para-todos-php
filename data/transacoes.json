@@ -1,0 +1,186 @@
+[
+    {
+        "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Emprestimo",
+        "estado": false,
+        "livro": {
+            "isbn": "1234567890123",
+            "nome": "Memorias postumas de bras cubas",
+            "autor": "machado de assis",
+            "estado": "emprestado"
+        },
+        "cliente": {
+            "nome": "Marcio Pereira",
+            "cpf": "12345678901",
+            "data_nascimento": "09\/09\/1997",
+            "endereco": "maria damasceno de castro",
+            "tipo": "Cliente"
+        },
+        "responsavel": {
+            "nome": "jefferson meneses",
+            "cpf": "12345678931",
+            "data_nascimento": "07\/09\/1997",
+            "endereco": "maria de castro silva",
+            "tipo": "Funcionario",
+            "cargo": "admin"
+        },
+        "data_devolucao_prevista": {
+            "date": "2026-11-12 16:33:23.072405",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        },
+        "data_devolucao_real": {
+            "date": "2026-10-13 16:34:47.164978",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        }
+    },
+    {
+        "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Emprestimo",
+        "estado": true,
+        "livro": {
+            "isbn": "1234567890123",
+            "nome": "Memorias postumas de bras cubas",
+            "autor": "machado de assis",
+            "estado": "emprestado"
+        },
+        "cliente": {
+            "nome": "Marcio Pereira",
+            "cpf": "12345678901",
+            "data_nascimento": "09\/09\/1997",
+            "endereco": "maria damasceno de castro",
+            "tipo": "Cliente"
+        },
+        "responsavel": {
+            "nome": "jefferson meneses",
+            "cpf": "12345678931",
+            "data_nascimento": "09\/07\/1997",
+            "endereco": "maria de castro silva",
+            "tipo": "Funcionario",
+            "cargo": "admin"
+        },
+        "data_devolucao_prevista": {
+            "date": "2026-11-12 17:36:08.624301",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        },
+        "data_devolucao_real": null
+    },
+    {
+        "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Venda",
+        "livro": {
+            "isbn": "1254369874512",
+            "nome": "O Cortiço",
+            "autor": "Aluísio Azevedo",
+            "estado": "vendido"
+        },
+        "cliente": {
+            "nome": "marcos paulo paulo",
+            "cpf": "14578412369",
+            "data_nascimento": "09\/04\/1972",
+            "endereco": "maria azevedo pinheiro",
+            "tipo": "Cliente"
+        },
+        "responsavel": {
+            "nome": "jefferson meneses",
+            "cpf": "12345678931",
+            "data_nascimento": "09\/07\/1997",
+            "endereco": "maria de castro silva",
+            "tipo": "Funcionario",
+            "cargo": "admin"
+        },
+        "preco_venda": 29.9
+    },
+    {
+        "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Emprestimo",
+        "estado": true,
+        "livro": {
+            "isbn": "1478523698741",
+            "nome": "Dom Quixote",
+            "autor": "Miguel de Cervantes",
+            "estado": "emprestado"
+        },
+        "cliente": {
+            "nome": "marcio libres dungo",
+            "cpf": "14523698741",
+            "data_nascimento": "03\/01\/1985",
+            "endereco": "alcervantes marechal pinheiro",
+            "tipo": "Cliente"
+        },
+        "responsavel": {
+            "nome": "jefferson meneses",
+            "cpf": "12345678931",
+            "data_nascimento": "09\/07\/1997",
+            "endereco": "maria de castro silva",
+            "tipo": "Funcionario",
+            "cargo": "admin"
+        },
+        "data_devolucao_prevista": {
+            "date": "2026-11-12 18:19:21.832004",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        },
+        "data_devolucao_real": null
+    },
+    {
+        "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Emprestimo",
+        "estado": true,
+        "livro": {
+            "isbn": "1452364781235",
+            "nome": "Dom Casmurro",
+            "autor": "Machado de Assis",
+            "estado": "emprestado"
+        },
+        "cliente": {
+            "nome": "miguel de cervantes lima castro",
+            "cpf": "14587963020",
+            "data_nascimento": "09\/04\/1985",
+            "endereco": "maria da conceicao de albuquerque",
+            "tipo": "Cliente"
+        },
+        "responsavel": {
+            "nome": "jefferson meneses",
+            "cpf": "12345678931",
+            "data_nascimento": "09\/07\/1997",
+            "endereco": "maria de castro silva",
+            "tipo": "Funcionario",
+            "cargo": "admin"
+        },
+        "data_devolucao_prevista": {
+            "date": "2026-11-12 18:20:11.105778",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        },
+        "data_devolucao_real": null
+    },
+    {
+        "tipo": "App\\Biblioteca\\Modelos\\Transacao\\Emprestimo",
+        "estado": true,
+        "livro": {
+            "isbn": "1436258361425",
+            "nome": "Madame Bovary",
+            "autor": "Gustave Flaubert",
+            "estado": "emprestado"
+        },
+        "cliente": {
+            "nome": "algusto juca silva",
+            "cpf": "14789632541",
+            "data_nascimento": "06\/05\/1973",
+            "endereco": "kamon vegas pinto",
+            "tipo": "Cliente"
+        },
+        "responsavel": {
+            "nome": "jefferson meneses",
+            "cpf": "12345678931",
+            "data_nascimento": "09\/07\/1997",
+            "endereco": "maria de castro silva",
+            "tipo": "Funcionario",
+            "cargo": "admin"
+        },
+        "data_devolucao_prevista": {
+            "date": "2026-11-12 18:20:48.362497",
+            "timezone_type": 3,
+            "timezone": "Europe\/Berlin"
+        },
+        "data_devolucao_real": null
+    }
+]

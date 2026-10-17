@@ -7,6 +7,7 @@ namespace App\Biblioteca\Sistema;
 use App\Biblioteca\Exeception\Livros\LivroNaoEncontradoException;
 use App\Biblioteca\Exeception\Usuarios\permissoes\PermissaoNegada;
 use App\Biblioteca\Exeception\Usuarios\UsuarioNaoEncontrado;
+use App\Biblioteca\Modelos\Biblioteca\Biblioteca;
 use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Usuario\Admin;
 use App\Biblioteca\Modelos\Usuario\Cliente;
@@ -15,6 +16,7 @@ use App\Biblioteca\Modelos\Usuario\Usuario;
 use App\Biblioteca\Operacao\DevolverLivro;
 use App\Biblioteca\Operacao\EmprestarLivro;
 use App\Biblioteca\Operacao\VenderLivro;
+use App\Biblioteca\Repository\Biblioteca\BibliotecaInterface;
 use App\Biblioteca\Repository\Livro\LivroRepositoryInterface;
 use App\Biblioteca\Repository\Transacao\TransacaoRepositoryInterface;
 use App\Biblioteca\Repository\Usuario\UsuarioRepositoryInterface;
@@ -26,6 +28,7 @@ class Sistema
         private readonly LivroRepositoryInterface $livros,
         private readonly TransacaoRepositoryInterface $transacoes,
         private readonly UsuarioRepositoryInterface $usuarios,
+        private readonly BibliotecaInterface $biblioteca,
     ){
     }
 
@@ -41,6 +44,11 @@ class Sistema
     public function cadastrarUsuario(Usuario $usuario): void
     {
         $this->usuarios->adicionar($usuario);
+    }
+
+    public function cadastrarBiblioteca(Biblioteca $biblioteca): void
+    {
+        $this->biblioteca->registrar($biblioteca);
     }
 
     // ---------------------------------------------------------------
@@ -168,5 +176,10 @@ class Sistema
     public  function listarTransacoes(): array
     {
         return $this->transacoes->todas();
+    }
+
+    public function estaAtivaBiblioteca(): ?Biblioteca
+    {
+        return $this->biblioteca->verifica();
     }
 }

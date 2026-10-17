@@ -1,8 +1,62 @@
 [
     {
         "isbn": "1234567890123",
+        "nome": "Memorias postumas de bras cubas",
+        "autor": "machado de assis",
+        "estado": "emprestado"
+    },
+    {
+        "isbn": "1478523698741",
+        "nome": "Dom Quixote",
+        "autor": "Miguel de Cervantes",
+        "estado": "emprestado"
+    },
+    {
+        "isbn": "1452364781235",
         "nome": "Dom Casmurro",
         "autor": "Machado de Assis",
+        "estado": "emprestado"
+    },
+    {
+        "isbn": "1203654789456",
+        "nome": "Grande Sertao",
+        "autor": "Joao Guimaraes ROsa",
+        "estado": "disponivel"
+    },
+    {
+        "isbn": "1478523541254",
+        "nome": "O Pequeno Príncipe",
+        "autor": "Antoine de Saint-Exupéry",
+        "estado": "disponivel"
+    },
+    {
+        "isbn": "1452369874123",
+        "nome": "Orgulho e Preconceito",
+        "autor": "Jane Austen",
+        "estado": "disponivel"
+    },
+    {
+        "isbn": "7845695123652",
+        "nome": "Vidas Secas",
+        "autor": "Graciliano Ramos",
+        "estado": "disponivel"
+    },
+    {
+        "isbn": "1473692514736",
+        "nome": "Devoradores de Estrelas",
+        "autor": "Andy weir",
+        "estado": "disponivel"
+    },
+    {
+        "isbn": "1436258361425",
+        "nome": "Madame Bovary",
+        "autor": "Gustave Flaubert",
+        "estado": "emprestado"
+    },
+    {
+        "isbn": "1479842654852",
+        "nome": "Os Macianos",
+        "autor": "Geraldo Filho Carvalho",
         "estado": "disponivel"
     }
 ]

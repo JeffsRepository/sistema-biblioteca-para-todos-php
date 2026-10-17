@@ -29,6 +29,7 @@ if (file_exists($autoloaderComposer)) {
 
 use App\Biblioteca\CLI\Menu;
 use App\Biblioteca\Factory\UsuarioFactory;
+use App\Biblioteca\Repository\Biblioteca\BibliotecaJsonRepository;
 use App\Biblioteca\Repository\Livro\JsonLivroRepository;
 use App\Biblioteca\Repository\Transacao\InMemoryRepository;
 use App\Biblioteca\Repository\Transacao\JsonTransacaoRepository;
@@ -41,8 +42,9 @@ $pastaDeDados = __DIR__ . '/../data';
 $repositorioDeLivros = new JsonLivroRepository($pastaDeDados . '/livros.json');
 $repositorioDeUsuarios = new JsonUsuarioRepository($pastaDeDados . '/usuarios.json');
 $repositorioDeTransacoes = new JsonTransacaoRepository($pastaDeDados . '/transacoes.json');
+$repositorioDeBiblioteca = new BibliotecaJsonRepository($pastaDeDados . '/biblitoeca.json');
 
-$sistema = new Sistema($repositorioDeLivros, $repositorioDeTransacoes, $repositorioDeUsuarios);
+$sistema = new Sistema($repositorioDeLivros, $repositorioDeTransacoes, $repositorioDeUsuarios, $repositorioDeBiblioteca);
 
 $menu = new Menu($sistema, new UsuarioFactory());
 $menu->executar();

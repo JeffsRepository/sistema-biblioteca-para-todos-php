@@ -6,6 +6,7 @@ namespace App\Biblioteca\CLI;
 
 use App\Biblioteca\Exeception\Usuarios\UsuarioNaoEncontrado;
 use App\Biblioteca\Factory\UsuarioFactory;
+use App\Biblioteca\Modelos\Biblioteca\Biblioteca;
 use App\Biblioteca\Modelos\Livros\Isbn;
 use App\Biblioteca\Modelos\Livros\Livro;
 use App\Biblioteca\Modelos\Usuario\Admin;
@@ -27,8 +28,10 @@ use App\Biblioteca\Sistema\Sistema;
  * iguais - so essa camada de apresentacao seria substituida.
  */
 
-class Menu
+final class Menu
 {
+    private Biblioteca $biblioteca;
+    
     public function __construct(
         private readonly Sistema $sistema,
         private readonly UsuarioFactory $usuario_factory,
@@ -37,13 +40,18 @@ class Menu
 
     public function executar(): void
     {
-        echo "==========================================\n";
-        echo "   SISTEMA DE BIBLIOTECA (linha de comando)\n";
-        echo "==========================================\n";
-
+        if(empty($this->sistema->estaAtivaBiblioteca())) {
+            $this->biblioteca = $this->cadastrarBiblioteca();
+        } else {
+            $this->biblioteca = $this->sistema->estaAtivaBiblioteca();
+        }
+        
         while(true)
         {
+            $this->barraDoSistema();
+            $this->exibirEmpresa();
             $this->exibirOpcoes();
+
             $opcao = $this->lerLinha('Digite uma opcao: ');
 
             try {
@@ -237,8 +245,11 @@ class Menu
         }
 
         echo "\n";
-        foreach($transacoes as $transacao) {
-            echo " - {$transacao}\n";
+        foreach($transacoes as $index => $transacao) {
+            $index = $index + 1;
+            echo "($index) - Transacao: ";
+            print_r($transacao);
+            echo "\n";
         }
     }
 
@@ -246,6 +257,27 @@ class Menu
     {
         echo "\nAté Logo!\n";
         exit();
+    }
+
+    // ---------------------------------------------------------------
+    // Ao Iniciar o Sistema
+    // ---------------------------------------------------------------
+
+    private function cadastrarBiblioteca(): Biblioteca
+    {
+        $nome = $this->lerLinha('Nome da Empresa: ');
+        $cnpj = str_replace(['.', '-', '/'], '', trim($this->lerLinha('CNPJ: ')));
+        $numero = preg_replace('/\D/', '', trim($this->lerLinha('N°: ')));
+        $endereco = trim($this->lerLinha('Endereco: '));
+        $contato = preg_replace('/\D/', '', trim($this->lerLinha('Numero para contato : ')));
+
+        $biblioteca = new Biblioteca($nome, $cnpj, $numero, $endereco, $contato);
+
+        echo "\nUsuario cadastrado com sucesso: {$biblioteca}\n";
+
+        $this->sistema->cadastrarBiblioteca($biblioteca);
+
+        return $biblioteca;
     }
 
     // ---------------------------------------------------------------
@@ -306,5 +338,21 @@ class Menu
         }
 
         return $usuario;
+    }
+
+    private function barraDoSistema(): void
+    { 
+        echo "=============================================\n";
+        echo "   SISTEMA DE BIBLIOTECA (linha de comando)\n";
+        echo "=============================================\n";
+    }
+
+    private function exibirEmpresa(): void
+    {
+        echo "[Empresa]........................ {$this->biblioteca->nomeBiblioteca()}\n";
+        echo "[CNPJ]........................ {$this->biblioteca->cnpjBiblioteca()}\n";
+        echo "[Numero]................................ {$this->biblioteca->numero()}\n";
+        echo "[Endereco]................... {$this->biblioteca->endereco()}\n";
+        echo "[Contato]........................ {$this->biblioteca->contato()}\n";
     }
 }

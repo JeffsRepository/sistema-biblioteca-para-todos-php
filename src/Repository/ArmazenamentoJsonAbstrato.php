@@ -44,7 +44,7 @@ abstract class ArmazenamentoJsonAbstrato
             mkdir($pasta, 0777, true);
         }
 
-        if(!file_exists($pasta)) {
+        if(!file_exists($this->caminhoArquivo)) {
             file_put_contents($this->caminhoArquivo, '[]');
         }
     }
@@ -59,7 +59,7 @@ abstract class ArmazenamentoJsonAbstrato
     protected function lerTodosOsRegistros(): array
     {
         $conteudo = file_get_contents($this->caminhoArquivo);
-        
+
         if($conteudo === false || trim($conteudo) === '') {
             return [];
         }
